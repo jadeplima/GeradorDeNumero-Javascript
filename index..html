@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Gerador de Numeros</title>
+    </head>
+    <body>
+
+        <!-- Estrutura Do gerador-->
+        <h1>Gerador de números</h1>
+
+        <form name="form_main">
+            <div>
+                <label for="number">Quantidade</label>
+                <input type="number" id="number" />
+            </div>
+                <div>
+                    <label for="type">Tipo</label>
+                    <input type="radio" name="type" id="odd" value="odd" />
+                    <label for="odd">Impar</label>
+                    <input type="radio" name="type" id="even" value="even" />
+                    <label for="even">Par</label>
+                    <input type="radio" name="type" id="real" value="real" checked='checked' />
+                    <label for="real">Reais</label>
+                </div>
+
+                    <button type="button" name="generate">Gerar</button>
+
+                    <div id="output"></div>
+        </form>
+    
+        <!---Logica do projeto-->
+        <script>
+            "use strict";
+
+            let button = document.form_main.generate;
+            button.addEventListener('click', generate);
+
+                function generate() {
+                    let output = document.getElementById('output');
+                    let total = document.form_main.number.value;
+                    let type = document.form_main.type.value;
+                    let numbers = [];
+
+                     switch (type) {
+                        case 'odd':
+                        numbers = generateOdd(total);
+                        break;
+                        case 'even':
+                        numbers = generateEven(total);
+                        break;
+                        case 'real':
+                        default:
+                        numbers = generateReal(total);
+                        break;
+                    }
+
+                        output.innerHTML = numbers;
+                }
+
+                    function generateOdd(total) {
+                        let numbers = [];
+                        let odd = 0;
+                    for (let index = 0; index < total; index++) {
+                        while (odd % 2 == 0) { odd++; }
+                        numbers.push(odd);
+                        odd++;
+                    }
+                    return numbers;
+                }
+
+                    function generateEven(total) {
+                        let numbers = [];
+                        let even = 0;
+                    for (let index = 0; index < total; index++) {
+                        while (even % 2 != 0) { even++; }
+                        numbers.push(even);
+                        even++;
+                    }
+                    return numbers;
+                }
+
+                    function generateReal(total) {
+                        let numbers = [];
+                    for (let index = 0; index < total; index++) {
+                        numbers.push(index);
+                    }
+                    return numbers;
+                }
+        
+        </script>
+
+    </body>
+</html>
